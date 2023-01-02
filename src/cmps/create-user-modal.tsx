@@ -24,7 +24,6 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
 
         ev.preventDefault()
         if (cred.role === 'User' || cred.role === 'Admin') {
-            // console.log('token:', token)
             try {
                 if (token) {
                     let newUser
@@ -40,27 +39,26 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
                             navigate('/login')
                         }, 2100)
                     }
-                    // setTimeout(async () => {
-                        console.log('currToken:', currToken)
-                        if (user) {
-                            newUser = await userService.updateUser(user.id, cred, currToken)
-                            dispatch(updateUser(newUser))
-                            showActionMsg('User updated', 'success')
-                        } else {
-                            newUser = await userService.createUser(cred, currToken)
-                            dispatch(updateUsers(newUser))
-                            showActionMsg('User created', 'success')
-                        }
-                    // }, 1500)
+                    if (user) {
+                        newUser = await userService.updateUser(user.id, cred, currToken)
+                        dispatch(updateUser(newUser))
+                        showActionMsg('User updated', 'success')
+                    } else {
+                        newUser = await userService.createUser(cred, currToken)
+                        dispatch(updateUsers(newUser))
+                        showActionMsg('User created', 'success')
+                    }
 
 
                 }
             } catch (err) {
-                // console.log('err:', err)
                 showActionMsg('Failed to update user', 'failure')
             }
             closeModal()
-        } else return
+        } else {
+            showActionMsg('Role must be "User" or "Admin"', 'failure')
+            return
+        }
     }
 
     return (

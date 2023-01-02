@@ -2,8 +2,6 @@ import axios, { AxiosError } from 'axios'
 
 const BASE_URL = 'https://45-32-136-124.sslip.io/api/'
 
-//access_token: 
-// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzI2NTA0NTAsImV4cCI6MTY3MjY1MDc1MCwianRpIjoiMzUyYWM5OGQtM2U1Ni00YjA2LWI5N2EtYzQwNmUyZjc4NTg3IiwiaWQiOjEsInJscyI6IkFkbWluIiwicmZfZXhwIjoxNjcyNzM2ODUwfQ.ECOl5dcANvmlKJmgOrqwBV9_i1-g0DlPYR_M-5y-UBg"
 
 
 
@@ -12,15 +10,12 @@ export const httpService = {
         return ajax(endpoint, 'GET', data, token)
     },
     post(endpoint: string, data: any, token: string | null) {
-        // console.log('token:', token)
         return ajax(endpoint, 'POST', data, token)
     },
     put(endpoint: string, data: any, token: string | null) {
         return ajax(endpoint, 'PUT', data, token)
     },
     patch(endpoint: string, data: any, token: string | null) {
-        console.log('patcvhing');
-
         return ajax(endpoint, 'PATCH', data, token)
     },
     delete(endpoint: string, data: any, token: string | null) {

@@ -11,7 +11,6 @@ export const userService = {
 }
 
 async function getUserById() {
-    // console.log('cred:', cred)
     try {
         await httpService.get
     } catch (err) {
@@ -20,7 +19,7 @@ async function getUserById() {
 }
 
 interface Cred {
-    id?:number
+    id?: number
     username: string,
     password: string,
     email?: string,
@@ -30,7 +29,6 @@ async function authenticateUser(cred: Cred) {
 
     try {
         const token = await httpService.post('auth/login', cred, null)
-        console.log('token:', token)
         return token
     } catch (err) {
         throw err
@@ -39,7 +37,6 @@ async function authenticateUser(cred: Cred) {
 
 async function getUsers(token: string) {
     try {
-        console.log('token:', token)
         const users = await httpService.get('users', null, token)
         return users
     } catch (err) {
@@ -48,12 +45,8 @@ async function getUsers(token: string) {
 }
 
 async function refreshToken(token: string) {
-    // console.log('refrsh');
-
     try {
-        // console.log('token:', token)
         const newToken = await httpService.get('auth/refresh', null, token)
-        console.log('newToken:', newToken)
         return newToken
     } catch (err) {
         throw err
@@ -62,9 +55,7 @@ async function refreshToken(token: string) {
 
 async function createUser(cred: Cred, token: string) {
     try {
-        console.log('token:', token)
         const newUser = await httpService.post('users', cred, token)
-        console.log('newUser:', newUser)
         return newUser
     } catch (err) {
         throw err

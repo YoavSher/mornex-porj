@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { stat } from 'fs'
 import { User } from '../../interfaces/user'
 
 interface UserState {
@@ -55,16 +54,12 @@ const userSlice = createSlice({
                 }
         },
         updateUsers: (state, action: PayloadAction<User>) => {
-            // state.users?.push(action.payload)
             if (state.users) {
-                // console.log('action.payload.id:', action.payload.id)
                 state.users.push(action.payload)
             }
         },
         updateUser: (state, action: PayloadAction<User>) => {
-            // state.users?.push(action.payload)
             if (state.users) {
-                // console.log('action.payload.id:', action.payload.id)
                 state.users = state.users?.map(u => u.id === action.payload.id ? action.payload : u)
             }
         },

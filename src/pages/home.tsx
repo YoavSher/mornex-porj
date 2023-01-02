@@ -41,7 +41,6 @@ export const Home = () => {
     }
 
     const confirmUserDelete = async () => {
-        // console.log('currUserId:', currUserId)
         try {
             if (currUserId && token) {
                 let currToken = token

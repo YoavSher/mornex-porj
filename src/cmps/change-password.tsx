@@ -44,7 +44,6 @@ export const ChangePassword = ({ showActionMsg, toggleModal }: Props) => {
                 showActionMsg('Password changed', 'success')
             } catch (err) {
                 showActionMsg('Couldn\'t change password', 'failure')
-                // console.log('err:', err)
             }
 
         }

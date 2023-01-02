@@ -43,7 +43,6 @@ const useGetUsers = () => {
     try {
       if (token) {
         const users = await userService.getUsers(token)
-        console.log('users:', users)
         dispatch(setUsers(users))
         const currUser = users.find((u: User) => u.username === username)
         dispatch(setUser(currUser))

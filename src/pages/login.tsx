@@ -20,9 +20,7 @@ export const Login = () => {
             dispatch(setToken(token.access_token))
             dispatch(setTokenFirstLoginTime(Date.now()))
             navigate('/')
-            // console.log('token:', token)
         } catch (err) {
-            // console.log('err: ', err);
             showActionMsg('Wrong username or password', 'failure')
         }
     }
