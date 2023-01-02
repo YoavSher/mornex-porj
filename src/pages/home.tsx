@@ -25,7 +25,7 @@ export const Home = () => {
 
     const isAdmin = loggedInUser?.role === 'Admin'
 
-    const { refreshToken, timeCheck } = useRefreshToken()
+    const { refreshToken, timeCheck, newLoginTimeCheck } = useRefreshToken()
 
     const onCreateNewUser = () => {
         setNewUserModal(true)
@@ -49,7 +49,7 @@ export const Home = () => {
                     currToken = newToken.access_token
                     dispatch(setToken(newToken.access_token))
                     dispatch(setTokenUpdatedTime(Date.now()))
-                } else if (timeCheck > 60 * 24) {
+                } else if (newLoginTimeCheck > 60 * 24) {
                     showActionMsg('Connection expired', 'failure')
                     setTimeout(() => {
                         navigate('/login')

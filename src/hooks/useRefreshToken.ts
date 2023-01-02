@@ -6,9 +6,11 @@ import { setToken } from "../store/user/user.reducer"
 export const useRefreshToken = () => {
     const token = useAppSelector(state => state.user.token)
     const lastUpdate = useAppSelector(state => state.user.tokenTime?.updatedTime)
+    const firstLogin = useAppSelector(state => state.user.tokenTime?.firstLogin)
     const dispatch = useAppDispatch()
 
     const timeCheck = lastUpdate ? ((Date.now() - lastUpdate) / 1000 / 60) : 0
+    const newLoginTimeCheck = firstLogin ? ((Date.now() - firstLogin) / 1000 / 60) : 0
 
     const refreshToken = async () => {
         if (token) {
@@ -23,5 +25,5 @@ export const useRefreshToken = () => {
             }
         }
     }
-    return { refreshToken, timeCheck }
+    return { refreshToken, timeCheck, newLoginTimeCheck }
 }

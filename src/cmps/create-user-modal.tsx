@@ -18,7 +18,7 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { cred, handleChange } = useForm(user?.username, undefined, user?.email, user?.role)
-    const { refreshToken, timeCheck } = useRefreshToken()
+    const { refreshToken, timeCheck, newLoginTimeCheck } = useRefreshToken()
 
     const saveUser = async (ev: SyntheticEvent) => {
 
@@ -33,7 +33,7 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
                         currToken = newToken.access_token
                         dispatch(setToken(newToken.access_token))
                         dispatch(setTokenUpdatedTime(Date.now()))
-                    } else if (timeCheck > 60 * 24) {
+                    } else if (newLoginTimeCheck > 60 * 24) {
                         showActionMsg('Connection expired', 'failure')
                         setTimeout(() => {
                             navigate('/login')
