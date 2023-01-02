@@ -1,5 +1,6 @@
 import { ChangeEvent, useState, SyntheticEvent } from "react"
 import { useNavigate } from "react-router-dom"
+import { ActionMsg } from "../cmps/action-msg"
 import { userService } from "../services/user.service"
 import { useAppDispatch } from "../store/store.hooks"
 import { setToken, setTokenFirstLoginTime, setUsername } from "../store/user/user.reducer"
@@ -7,7 +8,9 @@ import { setToken, setTokenFirstLoginTime, setUsername } from "../store/user/use
 export const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const { cred, handleChange, reset } = useForm()
+    const [actionMsg, setActionMsg] = useState('')
+    const [actionType, setActionType] = useState('')
+    const { cred, handleChange } = useForm()
     const getUser = async (ev: SyntheticEvent) => {
         ev.preventDefault()
 
@@ -19,9 +22,17 @@ export const Login = () => {
             navigate('/')
             // console.log('token:', token)
         } catch (err) {
-            console.log('err: ', err);
-
+            // console.log('err: ', err);
+            showActionMsg('Wrong username or password', 'failure')
         }
+    }
+    const showActionMsg = (txt: string, type: string) => {
+        setActionMsg(txt)
+        setActionType(type)
+        setTimeout(() => {
+            setActionMsg('')
+            setActionType('')
+        }, 2000)
     }
     return (
         <section className="login">
@@ -36,8 +47,9 @@ export const Login = () => {
                     name="password"
                     value={cred.password}
                     onChange={handleChange} />
-                <button type="submit">Submit</button>
+                <button type="submit">Login</button>
             </form>
+            {actionMsg && <ActionMsg msg={actionMsg} type={actionType} />}
         </section>
     )
 }
@@ -49,8 +61,6 @@ const useForm = () => {
             return { ...prevState, [ev.target.name]: ev.target.value }
         })
     }
-    const reset = () => {
-        setCred({ username: '', password: '' })
-    }
-    return { cred, handleChange, reset }
+
+    return { cred, handleChange }
 }

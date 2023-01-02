@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { ActionMsg } from "../cmps/action-msg"
 import { CreateUserModal } from "../cmps/create-user-modal"
 import { DeleteUser } from "../cmps/delet-user"
+import { Loader } from "../cmps/loader"
 import { UserList } from "../cmps/user-list"
 import { useRefreshToken } from "../hooks/useRefreshToken"
 import { userService } from "../services/user.service"
@@ -70,10 +71,10 @@ export const Home = () => {
             setActionType('')
         }, 2000)
     }
-    if (!users) return <h1>Loading...</h1>
+    if (!users) return <section className="home"><Loader /></section>
     return (
         <section className="home">
-            {isAdmin && <button onClick={onCreateNewUser}>Create a new user</button>}
+            {isAdmin && <button className="create-user-btn" onClick={onCreateNewUser}>Create a new user</button>}
             <UserList users={users} deleteUser={onDeleteUser} showActionMsg={showActionMsg} />
             {newUserModal && <CreateUserModal closeModal={closeModal} showActionMsg={showActionMsg} />}
             {showDeleteModal && <DeleteUser closeModal={closeModal} confirmUserDelete={confirmUserDelete} />}

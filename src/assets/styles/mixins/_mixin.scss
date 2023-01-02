@@ -4,6 +4,14 @@
     align-items: center;
     gap: 15px;
 
+    input {
+        width: 15rem;
+        height: 1.7rem;
+        border-radius: 5px;
+        padding: 3px;
+        font-size: 1.2rem;
+    }
+
     button {
         cursor: pointer;
     }
@@ -16,9 +24,30 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all .4s;
+    color: white;
 
-    &:hover{
+    &:hover {
         background-color: rgba(47, 47, 210, 0.991);
         transition: all .4s;
     }
+}
+
+@mixin page-design {
+    position: relative;
+    padding: 5px 15px;
+    background: linear-gradient(transparent 0, rgba(42, 42, 202, 0.785) 100%), rgba(18, 18, 18, 1);
+    height: 100%;
+}
+
+@mixin form-modal {
+    background-color: rgb(46, 45, 45);
+    width: 400px;
+    padding: 34px 10px 10px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 1px #645959;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
 }

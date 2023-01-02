@@ -1,8 +1,13 @@
 .home {
-    position: relative;
-    padding: 5px 15px;
-    background: linear-gradient(transparent 0, rgba(42, 42, 202, 0.785) 100%), rgba(18, 18, 18, 1);
-    // background: linear-gradient(transparent 0, rgba(18, 18, 18, 1) 100%), blue;
-    height: 100%;
-}
+    // position: relative;
+    // padding: 5px 15px;
+    // background: linear-gradient(transparent 0, rgba(42, 42, 202, 0.785) 100%), rgba(18, 18, 18, 1);
+    // height: 100%;
+    @include page-design;
 
+    .create-user-btn {
+        @include btn;
+        // margin-top: 20px;
+        margin: 15px 0;
+    }
+}

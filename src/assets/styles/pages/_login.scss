@@ -1,6 +1,18 @@
 .login {
+    position: relative;
+
     form {
-        // width: 500px;
-        @include form
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include form;
+
+        button {
+            @include btn
+        }
     }
+
+    @include page-design;
+    padding-top: 20px;
 }

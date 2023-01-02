@@ -20,11 +20,13 @@ export const UserPreview = ({ user, deleteUser, showActionMsg }: Props) => {
     }
     return (
         <section className="user-preview">
-            {isAdmin && !isCurrUser && <button onClick={() => deleteUser(user.id)}>x</button>}
-            <h1>{user.username}</h1>
-            <h1>{user.email}</h1>
-            {isAdmin && <button onClick={() => setShowModal(true)}>Edit</button>}
-            {showModal && isAdmin && <CreateUserModal closeModal={closeModal} user={user} showActionMsg={showActionMsg}/>}
+            {isAdmin && !isCurrUser && <button className="delete-btn" onClick={() => deleteUser(user.id)}>x</button>}
+            <div className="user-details">
+                <h1>{user.username}</h1>
+                <h1>{user.email}</h1>
+            </div>
+            {isAdmin && <button className="edit-btn" onClick={() => setShowModal(true)}>Edit</button>}
+            {showModal && isAdmin && <CreateUserModal closeModal={closeModal} user={user} showActionMsg={showActionMsg} />}
         </section>
     )
 }

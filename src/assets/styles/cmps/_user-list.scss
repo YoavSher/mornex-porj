@@ -1,4 +1,16 @@
 .user-list {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    padding-top: 40px;
+
+    @media(min-width:700px) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        justify-content: inherit;
+        padding-top: 0;
+    }
 }

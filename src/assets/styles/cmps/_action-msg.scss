@@ -1,0 +1,18 @@
+.action-msg {
+    position: fixed;
+    bottom: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    z-index: 15;
+
+    &.success {
+        background-color: rgb(17, 127, 17);
+    }
+
+    &.failure {
+        background-color: rgb(234, 67, 67);
+    }
+}
