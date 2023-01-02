@@ -1,0 +1,20 @@
+.create-user-modal {
+    form {
+        @include form;
+    }
+
+    background-color: burlywood;
+    width: 200px;
+    padding: 34px 10px 10px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 1px #645959;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    .close-modal {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}
