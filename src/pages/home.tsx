@@ -44,14 +44,20 @@ export const Home = () => {
         // console.log('currUserId:', currUserId)
         try {
             if (currUserId && token) {
+                let currToken = token
                 if (timeCheck >= 5) {
                     const newToken = await refreshToken()
+                    currToken = newToken.access_token
                     dispatch(setToken(newToken.access_token))
                     dispatch(setTokenUpdatedTime(Date.now()))
                 } else if (timeCheck > 60 * 24) {
-                    navigate('/login')
+                    showActionMsg('Connection expired', 'failure')
+                    setTimeout(() => {
+                        navigate('/login')
+                    }, 2100)
                 }
-                await userService.deleteUser(currUserId, token)
+                // setTimeout(() => { }, 700)
+                await userService.deleteUser(currUserId, currToken)
                 dispatch(deleteUser(currUserId))
                 setShowDeleteModal(false)
                 setCurrUserId(null)

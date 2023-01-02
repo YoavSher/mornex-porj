@@ -31,22 +31,28 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
                     let currToken = token
                     if (timeCheck >= 5) {
                         const newToken = await refreshToken()
-                        currToken = newToken
+                        currToken = newToken.access_token
                         dispatch(setToken(newToken.access_token))
                         dispatch(setTokenUpdatedTime(Date.now()))
                     } else if (timeCheck > 60 * 24) {
-                        navigate('/login')
+                        showActionMsg('Connection expired', 'failure')
+                        setTimeout(() => {
+                            navigate('/login')
+                        }, 2100)
                     }
+                    // setTimeout(async () => {
+                        console.log('currToken:', currToken)
+                        if (user) {
+                            newUser = await userService.updateUser(user.id, cred, currToken)
+                            dispatch(updateUser(newUser))
+                            showActionMsg('User updated', 'success')
+                        } else {
+                            newUser = await userService.createUser(cred, currToken)
+                            dispatch(updateUsers(newUser))
+                            showActionMsg('User created', 'success')
+                        }
+                    // }, 1500)
 
-                    if (user) {
-                        newUser = await userService.updateUser(user.id, cred, currToken)
-                        dispatch(updateUser(newUser))
-                        showActionMsg('User updated', 'success')
-                    } else {
-                        newUser = await userService.createUser(cred, currToken)
-                        dispatch(updateUsers(newUser))
-                        showActionMsg('User created', 'success')
-                    }
 
                 }
             } catch (err) {

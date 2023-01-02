@@ -25,11 +25,14 @@ export const ChangePassword = ({ showActionMsg, toggleModal }: Props) => {
             let currToken = token
             if (timeCheck >= 5) {
                 const newToken = await refreshToken()
-                currToken = newToken
+                currToken = newToken.access_token
                 dispatch(setToken(newToken.access_token))
                 dispatch(setTokenUpdatedTime(Date.now()))
             } else if (timeCheck > 60 * 24) {
-                navigate('/login')
+                showActionMsg('Connection expired', 'failure')
+                setTimeout(() => {
+                    navigate('/login')
+                }, 2100)
             }
             try {
                 const user = {
