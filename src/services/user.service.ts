@@ -20,6 +20,7 @@ async function getUserById() {
 }
 
 interface Cred {
+    id?:number
     username: string,
     password: string,
     email?: string,

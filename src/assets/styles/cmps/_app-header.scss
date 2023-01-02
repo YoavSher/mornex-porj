@@ -1,0 +1,17 @@
+.app-header {
+    background-color: rgb(46, 45, 45);
+    padding: 5px 15px;
+
+    .logo {
+        color: white;
+    }
+
+    .user-actions {
+        gap: 10px;
+
+        button {
+            @include btn;
+            color: white;
+        }
+    }
+}

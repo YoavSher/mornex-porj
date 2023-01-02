@@ -19,15 +19,19 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
     const navigate = useNavigate()
     const { cred, handleChange } = useForm(user?.username, undefined, user?.email, user?.role)
     const { refreshToken, timeCheck } = useRefreshToken()
+
     const saveUser = async (ev: SyntheticEvent) => {
+
         ev.preventDefault()
         if (cred.role === 'User' || cred.role === 'Admin') {
-            console.log('token:', token)
+            // console.log('token:', token)
             try {
                 if (token) {
                     let newUser
+                    let currToken = token
                     if (timeCheck >= 5) {
                         const newToken = await refreshToken()
+                        currToken = newToken
                         dispatch(setToken(newToken.access_token))
                         dispatch(setTokenUpdatedTime(Date.now()))
                     } else if (timeCheck > 60 * 24) {
@@ -35,18 +39,18 @@ export const CreateUserModal = ({ closeModal, user, showActionMsg }: Props) => {
                     }
 
                     if (user) {
-                        newUser = await userService.updateUser(user.id, cred, token)
+                        newUser = await userService.updateUser(user.id, cred, currToken)
                         dispatch(updateUser(newUser))
                         showActionMsg('User updated', 'success')
                     } else {
-                        newUser = await userService.createUser(cred, token)
+                        newUser = await userService.createUser(cred, currToken)
                         dispatch(updateUsers(newUser))
                         showActionMsg('User created', 'success')
                     }
 
                 }
             } catch (err) {
-                console.log('err:', err)
+                // console.log('err:', err)
                 showActionMsg('Failed to update user', 'failure')
             }
             closeModal()

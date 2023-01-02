@@ -8,3 +8,17 @@
         cursor: pointer;
     }
 }
+
+@mixin btn {
+    border: none;
+    background-color: rgba(22, 22, 198, 0.774);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .4s;
+
+    &:hover{
+        background-color: rgba(47, 47, 210, 0.991);
+        transition: all .4s;
+    }
+}

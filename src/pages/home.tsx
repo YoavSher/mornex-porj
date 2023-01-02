@@ -58,7 +58,6 @@ export const Home = () => {
             }
         } catch (err) {
             showActionMsg('Failed to delete user', 'failure')
-            console.log('err:', err)
         }
 
     }
